@@ -14,7 +14,7 @@ public class Client {
     private String securitySocialNumber;
     LocalDateTime created;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client",  cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public Client() {}
