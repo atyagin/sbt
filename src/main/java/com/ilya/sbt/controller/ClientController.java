@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/clients/")
-public class MainController {
+public class ClientController {
     @Autowired
     private ClientServiceImpl clientService;
 
