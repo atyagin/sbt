@@ -21,7 +21,6 @@ public class Client {
     public Client(Long id, String name) {
         this.id = id;
         this.name = name;
-        securitySocialNumber = UUID.randomUUID().toString();
     }
 
     public Long getId() {
@@ -68,6 +67,7 @@ public class Client {
     @PrePersist
     public void toCreate() {
         setCreated(LocalDateTime.now());
+        securitySocialNumber = UUID.randomUUID().toString();
     }
 
     @Override
