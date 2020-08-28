@@ -3,6 +3,7 @@ package com.ilya.sbt.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -25,7 +26,6 @@ public class Order {
     public Order(Long id, String description, Client client) {
         this.id = id;
         this.description = description;
-        responsible = UUID.randomUUID().toString();
         this.client = client;
     }
 
@@ -51,6 +51,11 @@ public class Order {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    @PrePersist
+    public void toCreate() {
+        responsible = UUID.randomUUID().toString();
     }
 
     @Override

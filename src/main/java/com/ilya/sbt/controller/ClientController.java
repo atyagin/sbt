@@ -2,10 +2,9 @@ package com.ilya.sbt.controller;
 
 import com.ilya.sbt.domain.Client;
 import com.ilya.sbt.dto.ClientDTO;
-import com.ilya.sbt.service.ClientServiceImpl;
+import com.ilya.sbt.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/clients/")
 public class ClientController {
     @Autowired
-    private ClientServiceImpl clientService;
+    private ClientService clientService;
 
     @GetMapping
     public ResponseEntity<List<ClientDTO>> getClients() {
@@ -26,7 +25,7 @@ public class ClientController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(clientDTOList, HttpStatus.CREATED);
+        return new ResponseEntity<>(clientDTOList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -42,7 +41,7 @@ public class ClientController {
         return new ResponseEntity<>(clientDTO, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity<Client> addClient(@RequestBody @Valid Client client) {
         if (client == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -51,16 +50,16 @@ public class ClientController {
         return new ResponseEntity<>(client, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping
     public ResponseEntity<Client> updateClient(@RequestBody @Valid Client client) {
         if (client == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         clientService.saveClient(client);
-        return new ResponseEntity<>(client, HttpStatus.CREATED);
+        return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteClient(@PathVariable Long id) {
         if (id == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
