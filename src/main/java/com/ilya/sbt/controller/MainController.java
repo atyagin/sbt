@@ -18,18 +18,13 @@ public class MainController {
     @Autowired
     private ClientServiceImpl clientService;
 
-    @Autowired
-    private ClientMapper clientMapper;
-
     @GetMapping("/clients/")
     public List<ClientDTO> getClients() {
-        List<Client> clients = clientService.clientList();
-        return clientMapper.toDtoList(clients);
+        return clientService.clientList();
     }
 
     @GetMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id) {
-        Client client = clientService.getClient(id);
-        return clientMapper.toDto(client);
+        return clientService.getClient(id);
     }
 }
