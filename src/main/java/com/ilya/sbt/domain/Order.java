@@ -1,6 +1,9 @@
 package com.ilya.sbt.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -12,7 +15,8 @@ public class Order {
     private String description;
     private String responsible;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "clientId")
     private Client client;
 
@@ -47,5 +51,20 @@ public class Order {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id) &&
+                Objects.equals(description, order.description) &&
+                Objects.equals(responsible, order.responsible);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, responsible);
     }
 }

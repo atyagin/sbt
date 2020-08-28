@@ -1,9 +1,29 @@
 package com.ilya.sbt.dto;
 
-import com.ilya.sbt.domain.Client;
-
 public class OrderDTO {
     private Long id;
     private String description;
-    private Client client;
+
+    public OrderDTO() {}
+
+    public OrderDTO(Long id, String description) {
+        this.id = id;
+        this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
