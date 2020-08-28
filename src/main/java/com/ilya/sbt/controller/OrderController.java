@@ -2,7 +2,6 @@ package com.ilya.sbt.controller;
 
 import com.ilya.sbt.domain.Order;
 import com.ilya.sbt.dto.OrderDTO;
-import com.ilya.sbt.service.ClientService;
 import com.ilya.sbt.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
