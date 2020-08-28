@@ -1,10 +1,13 @@
 package com.ilya.sbt.service;
 
 import com.ilya.sbt.domain.Client;
+import com.ilya.sbt.domain.ClientPageDto;
 import com.ilya.sbt.dto.ClientDTO;
 import com.ilya.sbt.mapper.ClientMapper;
 import com.ilya.sbt.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +27,12 @@ public class ClientServiceImpl implements ClientService {
     public List<ClientDTO> clientList() {
         List<Client> clientList = clientRepository.findAll();
         return clientMapper.toDtoList(clientList);
+    }
+
+    @Override
+    public ClientPageDto clientPageableList(Pageable pageable) {
+        Page<Client> page = clientRepository.findAll(pageable);
+        return new ClientPageDto(page.getContent(), pageable.getPageNumber(), page.getTotalPages());
     }
 
     @Override

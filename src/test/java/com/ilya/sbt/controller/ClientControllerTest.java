@@ -50,7 +50,7 @@ public class ClientControllerTest {
 
     @Test
     public void getAllClients() throws Exception {
-        this.mockMvc.perform(get("/api/v1/clients/"))
+        this.mockMvc.perform(get("/api/v1/clients"))
                 .andExpect(status().isOk());
     }
 

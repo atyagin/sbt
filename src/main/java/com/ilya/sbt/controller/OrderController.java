@@ -17,7 +17,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/clients/{clientId}/orders/")
+    @GetMapping("/clients/{clientId}/orders")
     public ResponseEntity<List<OrderDTO>> getClientOrders(@PathVariable(value = "clientId") Long clientId, Pageable pageable) {
         List<OrderDTO> clientOrdersDTOList = orderService.clientOrderList(clientId);
 
@@ -28,7 +28,7 @@ public class OrderController {
         return new ResponseEntity<>(clientOrdersDTOList, HttpStatus.OK);
     }
 
-    @PostMapping("/clients/{clientId}/orders/")
+    @PostMapping("/clients/{clientId}/orders")
     public ResponseEntity<Order> addClientOrder(@PathVariable (value = "clientId") Long clientId, @Valid @RequestBody Order order) {
         if (order == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -38,7 +38,7 @@ public class OrderController {
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
-    @PutMapping("/clients/{clientId}/orders/")
+    @PutMapping("/clients/{clientId}/orders")
     public ResponseEntity<Order> updateClientOrder(@PathVariable (value = "clientId") Long clientId, @Valid @RequestBody Order order) {
         if (order == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
